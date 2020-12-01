@@ -1,49 +1,49 @@
 pipeline {
 	agent none
 	stages {
-		// stage('Test application') {
-		// 	agent {
-		// 		docker {
-		// 			image 'composer:latest'
-		// 		}
-		// 	}
+		 stage('Test application') {
+		 	agent {
+		 		docker {
+		 			image 'composer:latest'
+		 		}
+		 	}
 
-		// 	steps {
-		// 		sh 'composer install'
-		// 		sh './vendor/bin/phpunit tests --log-junit logs/unitreport.xml -c tests/phpunit.xml tests'
-		// 		sh './vendor/bin/phpcs --report=checkstyle --report-file=checkstyle.xml . --ignore=vendor'
-		// 	}
+		 	steps {
+		 		sh 'composer install'
+		 		sh './vendor/bin/phpunit tests --log-junit logs/unitreport.xml -c tests/phpunit.xml tests'
+		 		sh './vendor/bin/phpcs --report=checkstyle --report-file=checkstyle.xml . --ignore=vendor'
+		 	}
 
-		// 	post {
-		// 		always {
-		// 			junit testResults: 'logs/unitreport.xml'
-		// 			recordIssues( 
-		// 				enabledForFailure: true,
-		// 				tool: php()
-		// 			)
-		// 			recordIssues(
-		// 				enabledForFailure: true,
-		// 				tool: phpCodeSniffer(pattern: 'checkstyle.xml')
-		// 			)
-		// 		}	
-		// 	}
-		// }
+		 	post {
+		 		always {
+		 			junit testResults: 'logs/unitreport.xml'
+		 			recordIssues( 
+		 				enabledForFailure: true,
+		 				tool: php()
+		 			)
+		 			recordIssues(
+		 				enabledForFailure: true,
+		 				tool: phpCodeSniffer(pattern: 'checkstyle.xml')
+		 			)
+		 		}	
+		 	}
+		 }
 
-		stage("Run dependency check") {
-			agent {
-				docker {
-					image 'maven'
-				}
-			}
-			steps {
-				dependencyCheck additionalArguments: '--format HTML --suppression suppression.xml --format XML', odcInstallation: 'Default'
-			}
-			post {
-				success {
-					dependencyCheckPublisher pattern: 'dependency-check-report.xml'
-				}
-			}
-		}
+		//stage("Run dependency check") {
+		//	agent {
+		//		docker {
+		//			image 'maven'
+		//		}
+		//	}
+		//	steps {
+		//		dependencyCheck additionalArguments: '--format HTML --suppression suppression.xml --format XML', odcInstallation: 'Default'
+		//	}
+		//	post {
+		//		success {
+		//			dependencyCheckPublisher pattern: 'dependency-check-report.xml'
+		//		}
+		//	}
+		//}
 		// stage('Run sonar qube'){
 		// 	agent {
 		// 		docker {
