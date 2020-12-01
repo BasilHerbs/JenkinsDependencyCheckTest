@@ -6,5 +6,7 @@
       ]]></notes>
       <packageUrl regex="true">^pkg:javascript/jquery@.*$</packageUrl>
       <cve>CVE-2020-11023</cve>
+      <cve>CVE-2019-11358</cve>
+      <cve>CVE-2015-9251</cve>
    </suppress>
 </suppressions>
