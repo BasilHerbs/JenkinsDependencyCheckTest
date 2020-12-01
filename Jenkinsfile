@@ -11,20 +11,20 @@ pipeline {
 		 	steps {
 		 		sh 'composer install'
 		 		sh './vendor/bin/phpunit tests --log-junit logs/unitreport.xml -c tests/phpunit.xml tests'
-		 		sh './vendor/bin/phpcs --report=checkstyle --report-file=checkstyle.xml . --ignore=vendor'
+		 	//	sh './vendor/bin/phpcs --report=checkstyle --report-file=checkstyle.xml . --ignore=vendor'
 		 	}
 
 		 	post {
 		 		always {
 		 			junit testResults: 'logs/unitreport.xml'
-		 			recordIssues( 
-		 				enabledForFailure: true,
-		 				tool: php()
-		 			)
-		 			recordIssues(
-		 				enabledForFailure: true,
-		 				tool: phpCodeSniffer(pattern: 'checkstyle.xml')
-		 			)
+		 		//	recordIssues( 
+		 		//		enabledForFailure: true,
+		 		//		tool: php()
+		 		//	)
+		 		//	recordIssues(
+		 		//		enabledForFailure: true,
+		 		//		tool: phpCodeSniffer(pattern: 'checkstyle.xml')
+		 		//	)
 		 		}	
 		 	}
 		 }
